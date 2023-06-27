@@ -29,7 +29,7 @@ A list that contains:
 \itemize{
 \item \code{parameter_estimates} - Parameter estimates.
 \item \code{phi} - Precision parameter estimate.
-\item \code{residuals} - A vector of residuals (observed-fitted).
+\item \code{residuals} - Table with observed values (\code{y}), estimated values in classical regression (\code{yhatcl}), pure residual in classical regression (\code{ecl}), estimated values (\code{yhat}), the link function applied in the estimated values (\code{eta}), pure residual (\code{res}), standardized residual (\code{resstd}), standardized weighted residual 2 (\code{resstd2}), residual deviance (\code{resdeviance}), Cooks distance (\code{cookD}) and generalized leverage (\code{glbp}).
 \item \code{log_likelihood} - Log-likelihood of the fitted model.
 \item \code{aicc} - Corrected Akaike information criterion.
 \item \code{r2} - Pseudo R2 and adjusted pseudo R2 statistics.

@@ -61,7 +61,7 @@ A list that contains:
 \item \code{global_parameter} - Global parameter estimates, when existing.
 \item \code{global_phi} - Global scale parameter estimate, when existing.
 \item \code{global_parameter_tab} - Global parameter estimates table, when existing.
-\item \code{residuals} - Table with observed values (\code{y}), estimated values (\code{yhat}), the link function applied in the estimated values (\code{eta}), pure residual (\code{res}), standardized residual (\code{resstd}), residual deviance (\code{resdeviance}), Cooks distance (\code{cookD}), generalized leverage (\code{glbp}) and number of iterations used in the convergence in each model (\code{iteration}).
+\item \code{residuals} - Table with observed values (\code{y}), estimated values (\code{yhat}), the link function applied in the estimated values (\code{eta}), pure residual (\code{res}), standardized residual (\code{resstd}), standardized weighted residual 2 (\code{resstd2}), residual deviance (\code{resdeviance}), Cooks distance (\code{cookD}), generalized leverage (\code{glbp}) and number of iterations (\code{iteration}).
 \item \code{log_likelihood} - Log-likelihood of the fitted model.
 \item \code{aicc} - Corrected Akaike information criterion.
 \item \code{r2} - Pseudo R2 and adjusted pseudo R2 statistics.

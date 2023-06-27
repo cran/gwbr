@@ -29,7 +29,7 @@
 #' \item \code{global_parameter} - Global parameter estimates, when existing.
 #' \item \code{global_phi} - Global scale parameter estimate, when existing.
 #' \item \code{global_parameter_tab} - Global parameter estimates table, when existing.
-#' \item \code{residuals} - Table with observed values (\code{y}), estimated values (\code{yhat}), the link function applied in the estimated values (\code{eta}), pure residual (\code{res}), standardized residual (\code{resstd}), residual deviance (\code{resdeviance}), Cooks distance (\code{cookD}), generalized leverage (\code{glbp}) and number of iterations used in the convergence in each model (\code{iteration}).
+#' \item \code{residuals} - Table with observed values (\code{y}), estimated values (\code{yhat}), the link function applied in the estimated values (\code{eta}), pure residual (\code{res}), standardized residual (\code{resstd}), standardized weighted residual 2 (\code{resstd2}), residual deviance (\code{resdeviance}), Cooks distance (\code{cookD}), generalized leverage (\code{glbp}) and number of iterations (\code{iteration}).
 #' \item \code{log_likelihood} - Log-likelihood of the fitted model.
 #' \item \code{aicc} - Corrected Akaike information criterion.
 #' \item \code{r2} - Pseudo R2 and adjusted pseudo R2 statistics.
@@ -583,6 +583,8 @@ if(global==TRUE){
     H=diag(as.matrix(sqrt(z)*x)%*%solve(t(x)%*%as.matrix(z*x))%*%t(x*sqrt(z)))
     cookD=H*(resstd*resstd)/(k*(1-H)*(1-H))
 
+    resstd2=(ye-mue)/sqrt((trigamma(mu*phi)+trigamma((1-mu)*phi))*(1-H))
+
     eta=yhat
     mat=cbind(eta,yc)
     pseudor2=(cor(mat)%*%t(cor(mat)) -1)[1,1]
@@ -603,7 +605,7 @@ if(global==TRUE){
     AICC=AIC+2*(v1)*(v1+1)/(n-v1-1)
 
     yhat=mu
-    res_=data.frame(y,yhat,eta,res,resstd,resdeviance,cookD,glbp,iteration)
+    res_=data.frame(y,yhat,eta,res,resstd,resstd2,resdeviance,cookD,glbp,iteration)
     parameters2_=data.frame(bistdt_)
     names(parameters2_)=colname_
 

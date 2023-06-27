@@ -13,7 +13,7 @@
 #' \itemize{
 #' \item \code{parameter_estimates} - Parameter estimates.
 #' \item \code{phi} - Precision parameter estimate.
-#' \item \code{residuals} - A vector of residuals (observed-fitted).
+#' \item \code{residuals} - Table with observed values (\code{y}), estimated values in classical regression (\code{yhatcl}), pure residual in classical regression (\code{ecl}), estimated values (\code{yhat}), the link function applied in the estimated values (\code{eta}), pure residual (\code{res}), standardized residual (\code{resstd}), standardized weighted residual 2 (\code{resstd2}), residual deviance (\code{resdeviance}), Cooks distance (\code{cookD}) and generalized leverage (\code{glbp}).
 #' \item \code{log_likelihood} - Log-likelihood of the fitted model.
 #' \item \code{aicc} - Corrected Akaike information criterion.
 #' \item \code{r2} - Pseudo R2 and adjusted pseudo R2 statistics.
@@ -245,6 +245,8 @@ betareg_gwbr=function(yvar,xvar,data,link=c("logit", "probit", "loglog", "cloglo
   h <- diag(sqrt(z)*x%*%solve(t(x)%*%(z*x))%*%t(x*sqrt(z)))
   cookD <- h*(resstd*resstd)/(k%*%(1-h)*(1-h))
 
+  resstd2 <- (ye-mue)/sqrt((trigamma(mu*phi)+trigamma((1-mu)*phi))*(1-h))
+
   eta <- x%*%beta
   mat <- cbind(eta,yc)
   pseudor2 <- (cor(mat)%*%cor(mat)-1)[1,1]
@@ -303,6 +305,7 @@ betareg_gwbr=function(yvar,xvar,data,link=c("logit", "probit", "loglog", "cloglo
                  eta=as.vector(eta),
                  res,
                  resstd,
+                 resstd2,
                  resdeviance,
                  cookD=as.vector(cookD),
                  glbp=as.vector(ecl))
